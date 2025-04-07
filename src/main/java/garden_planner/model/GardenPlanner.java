@@ -79,7 +79,7 @@ public class GardenPlanner {
      *
      * WARNING: passing out the whole list allows clients to add/remove beds.
      * This is poor encapsulation, but is okay in this context where the client
-     * programs are known and we want to give them a lot of flexibility.
+     * programs are known, and we want to give them a lot of flexibility.
      *
      * @return a list of garden beds.
      */
@@ -150,9 +150,9 @@ public class GardenPlanner {
             String line = in.nextLine().trim();
             String[] words = line.split(" +");
             // System.out.println(Arrays.toString(words));  // just for debugging
-            if (line.startsWith("#") || line.length() == 0) {
+            if (line.startsWith("#") || line.isEmpty()) {
                 // we skip comment lines and empty lines.
-            } else if (words.length == 5 && words[0].toLowerCase().equals("rectangle")) {
+            } else if (words.length == 5 && words[0].equalsIgnoreCase("rectangle")) {
                 RectBed rect = new RectBed();
                 rect.setLeft(Double.parseDouble(words[1]));
                 rect.setTop(Double.parseDouble(words[2]));
@@ -186,7 +186,7 @@ public class GardenPlanner {
      */
     public double getTotalCost() {
         final double wallCost = totalWallLength * this.wallPrice;
-        final double soilVolume = totalGardenArea * this.SOIL_DEPTH;
+        final double soilVolume = totalGardenArea * SOIL_DEPTH;
         final double soilCost = soilVolume * this.soilPrice;
         // just for debugging:
         // System.out.printf("Total wall length is %.2f m, cost $%.2f.\n", totalWallLength, wallCost);
